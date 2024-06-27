@@ -4,42 +4,7 @@ import React from 'react';
 import axios from "axios";
 import { apiRoutes } from "../api/apiRoutes.ts";
 import { toast } from "react-toastify";
-
-export interface AuthUser {
-	id?: string; 
-	name?: string;
-	cpf?: string;
-	email: string;
-	birth?: string;
-	phone?: string;
-	created_at?: string; 
-	updated_at?: string; 
-}
-
-export interface LoginUser {
-	email: string;
-	password: string;
-}
-
-export interface RegisterUser {
-	name: string;
-	cpf: string;
-	birth: string;
-	phone: string;
-	email: string;
-	password: string;
-}
-
-interface AuthContextState {
-	user: AuthUser | null;
-	isAuthenticated: boolean;
-	isLoading: boolean;
-}
-
-interface AuthContextType extends AuthContextState {
-	login: (data: LoginUser) => void;
-	logout: () => void;
-}
+import { AuthContextState, AuthContextType, LoginUser } from "./types/index.ts";
 
 const initialState: AuthContextState = {
 	user: null,

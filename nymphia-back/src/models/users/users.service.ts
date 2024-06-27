@@ -1,8 +1,9 @@
 import { BadRequestException, ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.client';
-import { User } from './types/user';
 import { CreateUserDTO } from './dto/createUser';
 import { LoginUserDTO } from './dto/loginUser';
+import { User } from '@prisma/client';
+import { ChangeDescriptionDTO } from './dto/changeDescription';
 
 @Injectable()
 export class UsersService {
@@ -21,7 +22,11 @@ export class UsersService {
 
 		if (findUser) throw new ConflictException("User already exists");
 
-		return await this.prisma.user.create({ data });
+		return await this.prisma.user.create({ 
+			data: {
+				...data,
+			}
+		});
 	}
 
 	async login(data: LoginUserDTO): Promise<User> {
@@ -55,5 +60,24 @@ export class UsersService {
 
 	async findAll(): Promise<User[]> {
 		return await this.prisma.user.findMany();
+	}
+
+	async changeDescription(id: string, data: ChangeDescriptionDTO): Promise<User> {
+		const user = await this.prisma.user.findUnique({
+			where: {
+				id
+			}
+		})
+
+		if (!user) throw new NotFoundException("User not found");
+
+		return await this.prisma.user.update({
+			where: {
+				id
+			},
+			data: {
+				description: data.description
+			}
+		})
 	}
 }

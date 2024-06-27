@@ -6,6 +6,7 @@ import { Dashboard } from './pages/Dashboard.tsx';
 import { Login } from './pages/Login.tsx';
 import { Register } from './pages/Register.tsx';
 import { Error404 } from './pages/Error404.tsx';
+import { Home } from './pages/Home.tsx';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
 				</AuthGuard>
 			)} />
 			<Route path="/register" element={<Register />} />
-			<Route path="/" element={<Login />} />
+			<Route path="/login" element={<Login />} />
+			<Route path="/" element={<Home />} />
 			<Route path="*" element={<Error404 />} />
 		</Routes>
   );

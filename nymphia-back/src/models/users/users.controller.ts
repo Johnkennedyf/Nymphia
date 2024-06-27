@@ -1,8 +1,9 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, Post, Put } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDTO } from './dto/createUser';
-import { User } from './types/user';
+import { User } from '@prisma/client';
 import { LoginUserDTO } from './dto/loginUser';
+import { ChangeDescriptionDTO } from './dto/changeDescription';
 
 @Controller('users')
 export class UsersController {
@@ -30,4 +31,9 @@ export class UsersController {
 	async findAllUsers(): Promise<User[]> {
 		return await this.usersService.findAll();
 	}
+
+	@Put(':id')
+	async changeDescription(@Param("id") id: string, @Body() data: ChangeDescriptionDTO): Promise<User> {
+    return await this.usersService.changeDescription(id, data);
+  }
 }

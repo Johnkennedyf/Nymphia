@@ -9,7 +9,7 @@ import {
 	Typography
 } from '@mui/material';
 import { Navbar } from "../components/Navbar.tsx";
-import { AuthUser } from "../context/AuthContext";
+import { AuthUser } from "../context/types";
 import { BiLogIn } from 'react-icons/bi'
 import { useAuth } from "../hooks/useAuth.tsx";
 import { Link, useNavigate } from "react-router-dom";

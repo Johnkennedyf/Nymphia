@@ -5,7 +5,7 @@ import { BiLogIn } from "react-icons/bi"
 import { RiLockPasswordFill } from "react-icons/ri"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth.tsx"
-import { AuthUser, RegisterUser } from "../context/AuthContext.tsx"
+import { AuthUser, RegisterUser } from "../context/types"
 import { useFormik } from "formik"
 import * as Yup from 'yup';
 import axios from "axios"
@@ -130,6 +130,7 @@ const { login, isAuthenticated } = useAuth()
 							/>
 							<TextField
 								fullWidth
+								type="password"
 								sx={{ outlineColor: 'black' }}
 								label='Senha'
 								placeholder='Senha'
